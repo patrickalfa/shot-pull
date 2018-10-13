@@ -6,6 +6,7 @@ public class Arrow : MonoBehaviour
 {
     private Rigidbody2D _rgbd;
     private Transform _trf;
+    private Player _player;
 
     [Header("DEBUG")]
     public bool deployed;
@@ -13,8 +14,9 @@ public class Arrow : MonoBehaviour
 
     private void Start()
     {
-        _rgbd = GetComponent<Rigidbody2D>();
         _trf = transform;
+        _rgbd = GetComponent<Rigidbody2D>();
+        _player = FindObjectOfType<Player>();
 
         SetDeployed(false);
     }
@@ -31,7 +33,9 @@ public class Arrow : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D col)
     {
         if (col.name == "Player")
+        {
             col.GetComponent<Player>().isLoaded = true;
+        }
 
         if (!deployed)
             return;

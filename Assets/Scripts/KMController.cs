@@ -35,12 +35,23 @@ public class KMController : MonoBehaviour
 
         ////////////////////////////////////////////
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
+            _player.ChargeShot();
+
+        if (Input.GetButtonUp("Fire1"))
             _player.Shoot(axis);
 
         ////////////////////////////////////////////
 
         if (Input.GetButton("Fire2"))
             _player.Pull();
+
+        ////////////////////////////////////////////
+
+        if (Input.GetButton("Fire3"))
+            _player.HoldRope();
+
+        if (Input.GetButtonUp("Fire3"))
+            _player.ReleaseRope();
     }
 }
