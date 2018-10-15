@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(SpringJoint2D))]
+[RequireComponent(typeof(DistanceJoint2D))]
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
@@ -25,28 +25,45 @@ public class Player : MonoBehaviour
 
     public Arrow _arrow;
     public Bow _bow;
-    public LineRenderer _rope;
+    public Rope _rope;
 
     private Transform _trf;
     private Rigidbody2D _rgbd;
-    private SpringJoint2D _joint;
+    private DistanceJoint2D _joint;
 
     /////////////////////////////////////////
 
     [Header("DEBUG")]
-    public bool isLoaded = true;
     public float maxVelocity;
+    private bool __isLoaded;
+    public bool isLoaded
+    {
+        get
+        {
+            return __isLoaded;
+        }
+        set
+        {
+            __isLoaded = value;
+            _rope.active = !value;
+        }
+    }
 
     private void Start()
     {
         _trf = transform;
         _rgbd = GetComponent<Rigidbody2D>();
-        _joint = GetComponent<SpringJoint2D>();
+        _joint = GetComponent<DistanceJoint2D>();
+        isLoaded = true;
     }
 
     private void Update()
     {
         UpdateArrow();
+    }
+
+    private void FixedUpdate()
+    {
         LimitVelocity();
     }
 
@@ -66,7 +83,7 @@ public class Player : MonoBehaviour
     public void Move(float direction)
     {
         if (charging)
-            return;
+            direction = 0f;
 
         _rgbd.AddForce(Vector2.right * direction * acceleration);
 
@@ -166,9 +183,5 @@ public class Player : MonoBehaviour
             if (_joint.enabled && _trf.position.y >= _arrow.transform.position.y)
                 ReleaseRope();
         }
-
-        Vector3 attachedPos = _arrow.transform.position - (_arrow.transform.up * .5f);
-        _rope.SetPosition(0, _trf.position);
-        _rope.SetPosition(1, attachedPos);
     }
 }

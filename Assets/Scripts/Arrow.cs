@@ -24,10 +24,13 @@ public class Arrow : MonoBehaviour
     private void Update()
     {
         if (deployed)
-        {
             _trf.up = _rgbd.velocity;
+    }
+
+    private void FixedUpdate()
+    {
+        if (deployed)
             LimitVelocity();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -48,8 +51,6 @@ public class Arrow : MonoBehaviour
         Vector2 vel = _rgbd.velocity;
         if (vel.magnitude > maxVelocity)
             _rgbd.velocity = vel.normalized * maxVelocity;
-
-        print(vel.magnitude);
     }
 
     private void SetDeployed(bool state)

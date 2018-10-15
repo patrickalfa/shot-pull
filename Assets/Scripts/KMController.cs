@@ -15,7 +15,7 @@ public class KMController : MonoBehaviour
 
     private void Update()
     {
-        _player.Move(Input.GetAxis("Horizontal"));
+        _player.Move(Input.GetAxisRaw("Horizontal"));
 
         ////////////////////////////////////////////
 

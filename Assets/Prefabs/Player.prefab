@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4748221244223062}
   - component: {fileID: 212315450624956570}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4573684849333196}
   - component: {fileID: 120878987812287520}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4165469597206924}
   - component: {fileID: 114220090766475534}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   - component: {fileID: 4852515372944196}
   - component: {fileID: 20680735028767516}
   - component: {fileID: 81232116334142000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -84,8 +84,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4540083972226310}
+  - component: {fileID: 114469950444146252}
   - component: {fileID: 120055452387931084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rope
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423868306434608}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4512799845585788}
   - component: {fileID: 212676781417757818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4985457042983482}
   - component: {fileID: 212050203160507530}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4005327284445810}
   - component: {fileID: 212825604604322030}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,8 +168,8 @@ GameObject:
   - component: {fileID: 114155583581485910}
   - component: {fileID: 70520392655447288}
   - component: {fileID: 50629225482520234}
-  - component: {fileID: 231130314619534432}
-  m_Layer: 0
+  - component: {fileID: 232305734611560998}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460415489470682}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4698298378956428}
@@ -415,7 +416,6 @@ MonoBehaviour:
   pullForce: 5
   _arrow: {fileID: 0}
   _bow: {fileID: 114220090766475534}
-  _rope: {fileID: 120055452387931084}
   isLoaded: 1
   maxVelocity: 20
 --- !u!114 &114220090766475534
@@ -441,6 +441,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 114155583581485910}
+--- !u!114 &114469950444146252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1477580769841032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd765fadc1deea1489a56c022be4c72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
+  _arrowAttach: {fileID: 0}
 --- !u!120 &120055452387931084
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -810,8 +825,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!231 &231130314619534432
-SpringJoint2D:
+--- !u!232 &232305734611560998
+DistanceJoint2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -827,5 +842,4 @@ SpringJoint2D:
   m_ConnectedAnchor: {x: 0, y: 0}
   m_AutoConfigureDistance: 1
   m_Distance: 1
-  m_DampingRatio: 0
-  m_Frequency: 1
+  m_MaxDistanceOnly: 0
