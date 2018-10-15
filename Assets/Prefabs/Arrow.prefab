@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4440747723890278}
   - component: {fileID: 212042881375004130}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fletching
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673440075254486}
   - component: {fileID: 212994418190576620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4190978806719842}
   - component: {fileID: 212483096295719298}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   - component: {fileID: 114835749453958976}
   - component: {fileID: 70253162386962516}
   - component: {fileID: 50436965209983646}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

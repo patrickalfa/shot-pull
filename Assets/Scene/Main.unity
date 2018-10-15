@@ -257,12 +257,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &104118879 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114469950444146252, guid: 1882f8fb671e0494395011f5796883d8,
-    type: 2}
-  m_PrefabInternal: {fileID: 958219366}
-  m_Script: {fileID: 11500000, guid: fd765fadc1deea1489a56c022be4c72b, type: 3}
 --- !u!1 &287518242
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,11 +439,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &454069992 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 50436965209983646, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7,
-    type: 2}
-  m_PrefabInternal: {fileID: 503772295}
 --- !u!1001 &503772295
 Prefab:
   m_ObjectHideFlags: 0
@@ -488,22 +477,6 @@ Prefab:
     - target: {fileID: 4559045227642620, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
       propertyPath: m_RootOrder
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1893014479521858, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1703707243135426, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1836503873946318, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1509817465642872, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
-      propertyPath: m_Layer
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7, type: 2}
@@ -640,7 +613,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: b75b03fe7808ff6418cd3b2405547294, type: 3}
   m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FlipX: 0
@@ -664,11 +637,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 120055452387931084, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: m_Positions.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4698298378956428, guid: 1882f8fb671e0494395011f5796883d8, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -701,36 +669,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 232305734611560998, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: m_ConnectedRigidBody
-      value: 
-      objectReference: {fileID: 454069992}
-    - target: {fileID: 114469950444146252, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: _arrowAttach
-      value: 
-      objectReference: {fileID: 949888592}
     - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
         type: 2}
       propertyPath: _arrow
       value: 
       objectReference: {fileID: 2019612991}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+    - target: {fileID: 114469950444146252, guid: 1882f8fb671e0494395011f5796883d8,
         type: 2}
-      propertyPath: _rope
+      propertyPath: _arrowAttach
       value: 
-      objectReference: {fileID: 104118879}
-    - target: {fileID: 120055452387931084, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: m_Positions.Array.data[1].z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: maxSpeed
-      value: 10
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 949888592}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1882f8fb671e0494395011f5796883d8, type: 2}
   m_IsPrefabAsset: 0

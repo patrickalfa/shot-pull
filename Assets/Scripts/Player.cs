@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     public float acceleration;
     public float maxSpeed;
     public float jumpForce;
+    public LayerMask groundMask;
 
     [Header("Force")]
     public float shootForce;
@@ -20,6 +21,7 @@ public class Player : MonoBehaviour
 
     private float stringForce;
     private bool charging;
+    private bool grounded;
 
     /////////////////////////////////////////
 
@@ -64,6 +66,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        grounded = Physics2D.OverlapCircle(_trf.position + (Vector3.down * 1f), .5f, groundMask);
+        Debug.DrawLine(_trf.position, _trf.position + (Vector3.down * 1.5f), (grounded ? Color.cyan : Color.magenta));
+
         LimitVelocity();
     }
 
@@ -85,7 +90,7 @@ public class Player : MonoBehaviour
         if (charging)
             direction = 0f;
 
-        _rgbd.AddForce(Vector2.right * direction * acceleration);
+        _rgbd.AddForce(Vector2.right * direction * acceleration * Time.deltaTime);
 
         Vector2 vel = _rgbd.velocity;
         if (Mathf.Abs(vel.x) > maxSpeed)
@@ -96,6 +101,9 @@ public class Player : MonoBehaviour
 
     public void Jump()
     {
+        if (!grounded)
+            return;
+
         Vector2 vel = _rgbd.velocity;
         vel.y = 0f;
         _rgbd.velocity = vel;
@@ -110,7 +118,7 @@ public class Player : MonoBehaviour
 
         charging = true;
 
-        stringForce = Mathf.Clamp(stringForce + Time.deltaTime * 5f, 0f, 1f);
+        stringForce = Mathf.Clamp(stringForce + Time.deltaTime, 0f, 1f);
         _bow.UpdateString(stringForce);
     }
 
@@ -135,18 +143,18 @@ public class Player : MonoBehaviour
 
         if (!_arrow.deployed)
         {
-            _rgbd.velocity += (Vector2)(_arrow.transform.position - _trf.position).normalized * grappleForce * Time.timeScale;
+            _rgbd.velocity += (_rope.GetFirstPoint() - (Vector2)_trf.position).normalized * grappleForce * Time.deltaTime;
         }
         else
         {
-            _arrow.Pull(_trf.position, pullForce);
+            _arrow.Pull(_rope.GetLastPoint(), pullForce);
         }
     }
 
     public void HoldRope()
     {
         if (isLoaded || _arrow.deployed || _joint.enabled ||
-            _trf.position.y >= _arrow.transform.position.y)
+            _trf.position.y >= _rope.GetFirstPoint().y)
             return;
 
         _joint.enabled = true;
