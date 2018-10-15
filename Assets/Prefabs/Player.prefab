@@ -465,16 +465,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 3072
   repelDirections:
-  - {x: 0.65, y: 0.45}
-  - {x: -0.65, y: 0.45}
-  - {x: 0.65, y: -0.45}
-  - {x: -0.65, y: -0.45}
+  - {x: 0.25, y: 0.75}
+  - {x: -0.25, y: 0.75}
+  - {x: 0.25, y: -0.75}
+  - {x: -0.25, y: -0.75}
   - {x: 0.75, y: 0.25}
   - {x: -0.75, y: 0.25}
   - {x: 0.75, y: -0.25}
   - {x: -0.75, y: -0.25}
   shootForce: 15
-  grappleForce: 1500
+  rappelForce: 1500
   pullForce: 10
   _arrow: {fileID: 0}
   _bow: {fileID: 114220090766475534}

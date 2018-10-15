@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
 
     [Header("Force")]
     public float shootForce;
-    public float grappleForce;
+    public float rappelForce;
     public float pullForce;
 
     /////////////////////////////////////////
@@ -38,6 +38,7 @@ public class Player : MonoBehaviour
 
     [Header("DEBUG")]
     public float maxVelocity;
+    public bool holding;
     private bool __isLoaded;
     public bool isLoaded
     {
@@ -144,22 +145,36 @@ public class Player : MonoBehaviour
 
         if (!_arrow.deployed)
         {
-            Vector2 ropePoint = _rope.GetFirstPoint();
-
-            _rgbd.velocity += (ropePoint - (Vector2)_trf.position).normalized * grappleForce * Time.deltaTime;
-
-            float arrowDistance = Vector2.Distance(ropePoint, _arrow.transform.position);
-            float pointDistance = Vector2.Distance(_trf.position, ropePoint);
-
-            if (arrowDistance > 1f && pointDistance < 1.75f)
-            {
-                foreach (Vector2 dir in repelDirections)
-                    RepelWall(dir);
-            }
+            _rope.returning = true;
+            _arrow.active = false;
+            _arrow.SetDeployed(true);
         }
-        else
+
+        _arrow.Pull(_rope.GetLastPoint(), pullForce);
+    }
+
+    public void StopPulling()
+    {
+        _rope.returning = false;
+        _arrow.active = true;
+    }
+
+    public void Rappel()
+    {
+        if (isLoaded || _arrow.deployed)
+            return;
+
+        Vector2 ropePoint = _rope.GetFirstPoint();
+
+        _rgbd.velocity += (ropePoint - (Vector2)_trf.position).normalized * rappelForce * Time.deltaTime;
+
+        float arrowDistance = Vector2.Distance(ropePoint, _arrow.transform.position);
+        float pointDistance = Vector2.Distance(_trf.position, ropePoint);
+
+        if (arrowDistance > 1f && pointDistance < 1.75f)
         {
-            _arrow.Pull(_rope.GetLastPoint(), pullForce);
+            foreach (Vector2 dir in repelDirections)
+                RepelWall(dir);
         }
     }
 
@@ -170,13 +185,27 @@ public class Player : MonoBehaviour
             return;
 
         _joint.enabled = true;
+
+        holding = true;
+    }
+
+    public void RestrainRope()
+    {
+        if (isLoaded || !_arrow.deployed || _joint.enabled)
+            return;
+
+        _rope.Restrain();
     }
 
     public void ReleaseRope()
     {
         if (_joint.enabled)
+            _joint.enabled = false;
 
-        _joint.enabled = false;
+        if (!holding)
+            _rope.Release();
+
+        holding = false;
     }
 
     public void SetAxis(Vector2 axis)
@@ -210,7 +239,7 @@ public class Player : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(_trf.position, dir, 1.75f, LayerMask.GetMask("Solid"));
         if (hit)
         {
-            _rgbd.velocity += -dir * grappleForce * Time.deltaTime;
+            _rgbd.velocity += -dir * rappelForce * Time.deltaTime;
             Debug.DrawLine(_trf.position, (Vector2)_trf.position + (dir * 1.75f), Color.black);
         }
         else

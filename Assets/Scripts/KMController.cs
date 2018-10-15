@@ -36,22 +36,43 @@ public class KMController : MonoBehaviour
         ////////////////////////////////////////////
 
         if (Input.GetButton("Fire1"))
-            _player.ChargeShot();
+        {
+            if (_player.isLoaded)
+                _player.ChargeShot();
+            else
+            {
+                if (_player._arrow.deployed)
+                    _player.Pull();
+                else
+                    _player.HoldRope();
+            }
+        }
 
         if (Input.GetButtonUp("Fire1"))
-            _player.Shoot(axis);
+        {
+            if (_player.isLoaded)
+                _player.Shoot(axis);
+            else
+                _player.ReleaseRope();
+        }
 
         ////////////////////////////////////////////
 
         if (Input.GetButton("Fire2"))
-            _player.Pull();
+        {
+            if (_player._arrow.deployed)
+                _player.RestrainRope();
+        }
+
+        if (Input.GetButtonDown("Fire2"))
+        {
+            if (!_player._arrow.deployed)
+                _player.isLoaded = true;
+        }
 
         ////////////////////////////////////////////
 
         if (Input.GetButton("Fire3"))
-            _player.HoldRope();
-
-        if (Input.GetButtonUp("Fire3"))
-            _player.ReleaseRope();
+            _player.Rappel();
     }
 }

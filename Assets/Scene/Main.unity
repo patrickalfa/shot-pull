@@ -113,6 +113,77 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &51285129
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1639497314523100, guid: 1882f8fb671e0494395011f5796883d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51285130}
+  - component: {fileID: 51285132}
+  - component: {fileID: 51285131}
+  m_Layer: 8
+  m_Name: HingeArrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &51285130
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 4325632704090394, guid: 1882f8fb671e0494395011f5796883d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51285129}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796517959}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!232 &51285131
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51285129}
+  m_Enabled: 0
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 454069992}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 1
+  m_Distance: 1
+  m_MaxDistanceOnly: 0
+--- !u!50 &51285132
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 50780655190620708, guid: 1882f8fb671e0494395011f5796883d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 51285129}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &60540381
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,6 +510,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &454069992 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 50436965209983646, guid: 3eaf8feb9e6c6c04584fb57f23bf53e7,
+    type: 2}
+  m_PrefabInternal: {fileID: 503772295}
 --- !u!1001 &503772295
 Prefab:
   m_ObjectHideFlags: 0
@@ -681,44 +757,23 @@ Prefab:
       objectReference: {fileID: 949888592}
     - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
         type: 2}
-      propertyPath: repelDirections.Array.data[0].x
-      value: 0.25
+      propertyPath: pullForce
+      value: 1000
       objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+    - target: {fileID: 1639497314523100, guid: 1882f8fb671e0494395011f5796883d8, type: 2}
+      propertyPath: m_Name
+      value: HingePlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 114469950444146252, guid: 1882f8fb671e0494395011f5796883d8,
         type: 2}
-      propertyPath: repelDirections.Array.data[1].x
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+      propertyPath: _hingePlayer
+      value: 
+      objectReference: {fileID: 1826135900}
+    - target: {fileID: 114469950444146252, guid: 1882f8fb671e0494395011f5796883d8,
         type: 2}
-      propertyPath: repelDirections.Array.data[2].x
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: repelDirections.Array.data[3].x
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: repelDirections.Array.data[0].y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: repelDirections.Array.data[1].y
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: repelDirections.Array.data[2].y
-      value: -0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
-        type: 2}
-      propertyPath: repelDirections.Array.data[3].y
-      value: -0.75
-      objectReference: {fileID: 0}
+      propertyPath: _hingeArrow
+      value: 
+      objectReference: {fileID: 51285130}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1882f8fb671e0494395011f5796883d8, type: 2}
   m_IsPrefabAsset: 0
@@ -1423,6 +1478,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1796517959 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4540083972226310, guid: 1882f8fb671e0494395011f5796883d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 958219366}
 --- !u!1 &1818695499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1567,6 +1627,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1826135900 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4325632704090394, guid: 1882f8fb671e0494395011f5796883d8,
+    type: 2}
+  m_PrefabInternal: {fileID: 958219366}
 --- !u!1 &1938868584
 GameObject:
   m_ObjectHideFlags: 0

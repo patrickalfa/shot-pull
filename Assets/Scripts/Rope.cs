@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 [RequireComponent(typeof(LineRenderer))]
 public class Rope : MonoBehaviour
@@ -20,19 +21,24 @@ public class Rope : MonoBehaviour
         }
     }
 
+    public bool returning;
+
     public LayerMask layerMask;
     public Transform _arrowAttach;
-    public Transform _hinge;
+    public Transform _hingePlayer;
+    public Transform _hingeArrow;
 
     private Transform _trf;
     private LineRenderer _line;
     private List<Vector2> _points;
+    private DistanceJoint2D _arrowJoint;
 
     private void Awake()
     {
         _trf = transform;
         _line = GetComponent<LineRenderer>();
         _points = new List<Vector2>();
+        _arrowJoint = _hingeArrow.GetComponent<DistanceJoint2D>();
     }
 
     private void FixedUpdate()
@@ -47,12 +53,17 @@ public class Rope : MonoBehaviour
 
     private void CheckWrapPoints()
     {
-        CheckLastWrapPoint();
+        if (returning)
+            return;
 
+        CheckLastWrapPoint();
         if (_points.Count > 0)
         {
             CheckFirstWrapPoint();
-            CheckUnwrapPoint();
+            CheckFirstUnwrapPoint();
+
+            if (_points.Count > 1)
+                CheckLastUnwrapPoint();
         }
     }
 
@@ -88,7 +99,23 @@ public class Rope : MonoBehaviour
             _points.Insert(0, GetClosestPoint(hit, false));
     }
 
-    private void CheckUnwrapPoint()
+    private void CheckLastUnwrapPoint()
+    {
+        Vector2 nextPoint = (_points.Count > 1 ? _points[_points.Count - 2] : (Vector2)_trf.position);
+
+        Vector2 direction = (nextPoint - (Vector2)_arrowAttach.position).normalized;
+        float distance = Vector2.Distance(_arrowAttach.position, nextPoint);
+
+        // -- DEBUG ---------------------------------
+        Debug.DrawLine(_arrowAttach.position, (Vector2)_arrowAttach.position + (direction * (distance - .1f)), Color.red);
+        // -- DEBUG ---------------------------------
+
+        RaycastHit2D hit = Physics2D.Raycast(_arrowAttach.position, direction, distance - .1f, layerMask);
+        if (!hit && Utils.PointOnLine2D(_points[_points.Count - 2], _arrowAttach.position, nextPoint, 10f))
+            _points.RemoveAt(_points.Count - 1);
+    }
+
+    private void CheckFirstUnwrapPoint()
     {
         Vector2 nextPoint = (_points.Count > 1 ? _points[1] : (Vector2)_arrowAttach.position);
 
@@ -107,9 +134,15 @@ public class Rope : MonoBehaviour
     private void SetHingePosition()
     {
         if (_points.Count > 0)
-            _hinge.position = _points[0];
+        {
+            _hingePlayer.position = _points[0];
+            _hingeArrow.position = _points[_points.Count - 1];
+        }
         else
-            _hinge.position = _arrowAttach.position;
+        {
+            _hingePlayer.position = _arrowAttach.position;
+            _hingeArrow.position = _trf.position;
+        }
     }
 
     private Vector2 GetClosestPoint(RaycastHit2D hit, bool last)
@@ -156,6 +189,8 @@ public class Rope : MonoBehaviour
     {
         _line.positionCount = 0;
         _points.Clear();
+        returning = false;
+        _arrowJoint.enabled = false;
     }
 
     public Vector2 GetFirstPoint()
@@ -166,5 +201,42 @@ public class Rope : MonoBehaviour
     public Vector2 GetLastPoint()
     {
         return (_points.Count > 0) ? _points[_points.Count - 1] : (Vector2)_trf.position;
+    }
+
+    public void Restrain()
+    {
+        _arrowJoint.enabled = true;
+    }
+
+    public void Release()
+    {
+        _arrowJoint.enabled = false;
+    }
+
+    public void ReturnToPlayer()
+    {
+        Time.timeScale = .1f;
+        returning = true;
+        StartCoroutine(WaitForArrowToReturn());
+    }
+
+    private IEnumerator WaitForArrowToReturn()
+    {
+        while (_points.Count > 0)
+        {
+            _arrowAttach.parent.DOMove(_points[_points.Count - 1], .02f).SetEase(Ease.Linear);
+
+            yield return new WaitForSeconds(.025f);
+
+           _points.RemoveAt(_points.Count - 1);
+        }
+
+        _arrowAttach.parent.DOMove(_trf.position, .02f);
+
+        yield return new WaitForSeconds(.02f);
+
+        active = false;
+
+        Time.timeScale = 1f;
     }
 }

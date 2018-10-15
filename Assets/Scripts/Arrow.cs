@@ -9,6 +9,7 @@ public class Arrow : MonoBehaviour
     private Player _player;
 
     [Header("DEBUG")]
+    public bool active;
     public bool deployed;
     public float maxVelocity;
 
@@ -24,7 +25,7 @@ public class Arrow : MonoBehaviour
     private void Update()
     {
         if (deployed)
-            _trf.up = _rgbd.velocity;
+            _trf.up = Vector3.Lerp(_trf.up, _rgbd.velocity, Time.deltaTime);
     }
 
     private void FixedUpdate()
@@ -38,9 +39,10 @@ public class Arrow : MonoBehaviour
         if (col.name == "Player")
         {
             col.GetComponent<Player>().isLoaded = true;
+            active = true;
         }
 
-        if (!deployed)
+        if (!deployed || !active)
             return;
 
         SetDeployed(false);
@@ -53,7 +55,7 @@ public class Arrow : MonoBehaviour
             _rgbd.velocity = vel.normalized * maxVelocity;
     }
 
-    private void SetDeployed(bool state)
+    public void SetDeployed(bool state)
     {
         deployed = state;
         _rgbd.constraints = state ?
@@ -65,12 +67,14 @@ public class Arrow : MonoBehaviour
     {
         SetDeployed(true);
 
+        active = true;
+
         _rgbd.velocity = Vector2.zero;
         _rgbd.AddForce(force, ForceMode2D.Impulse);
     }
 
     public void Pull(Vector3 towards, float strength)
     {
-        _rgbd.velocity += (Vector2)(towards - _trf.position).normalized * strength * Time.timeScale;
+        _rgbd.velocity += (Vector2)(towards - _trf.position).normalized * strength * Time.deltaTime;
     }
 }
