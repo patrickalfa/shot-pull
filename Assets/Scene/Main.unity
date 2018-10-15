@@ -679,6 +679,46 @@ Prefab:
       propertyPath: _arrowAttach
       value: 
       objectReference: {fileID: 949888592}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[0].x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[1].x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[2].x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[3].x
+      value: -0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[0].y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[1].y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[2].y
+      value: -0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 114155583581485910, guid: 1882f8fb671e0494395011f5796883d8,
+        type: 2}
+      propertyPath: repelDirections.Array.data[3].y
+      value: -0.75
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1882f8fb671e0494395011f5796883d8, type: 2}
   m_IsPrefabAsset: 0

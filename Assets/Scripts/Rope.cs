@@ -52,7 +52,7 @@ public class Rope : MonoBehaviour
         if (_points.Count > 0)
         {
             CheckFirstWrapPoint();
-            CheckRemoveWrapPoint();
+            CheckUnwrapPoint();
         }
     }
 
@@ -88,7 +88,7 @@ public class Rope : MonoBehaviour
             _points.Insert(0, GetClosestPoint(hit, false));
     }
 
-    private void CheckRemoveWrapPoint()
+    private void CheckUnwrapPoint()
     {
         Vector2 nextPoint = (_points.Count > 1 ? _points[1] : (Vector2)_arrowAttach.position);
 
@@ -100,7 +100,7 @@ public class Rope : MonoBehaviour
         // -- DEBUG ---------------------------------
 
         RaycastHit2D hit = Physics2D.Raycast(_trf.position, direction, distance - .1f, layerMask);
-        if (!hit && Utils.PointOnLine2D(_points[0], _trf.position, nextPoint, 5f))
+        if (!hit && Utils.PointOnLine2D(_points[0], _trf.position, nextPoint, 10f))
             _points.RemoveAt(0);
     }
 

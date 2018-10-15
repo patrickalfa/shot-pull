@@ -22,4 +22,11 @@ public static class Utils
             ? p.y + t > b.y && p.y - t < a.y
             : p.y + t > a.y && p.y - t < b.y;
     }
+
+    public static bool AngleCompare(Vector2 a1, Vector2 a2, Vector2 b1, Vector2 b2, float t = 1E-03f)
+    {
+        Vector2 dir1 = (a2 - a1).normalized;
+        Vector2 dir2 = (b2 - b1).normalized;
+        return Vector2.Distance(dir1, dir2) < t;
+    }
 }
